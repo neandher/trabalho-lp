@@ -3,11 +3,14 @@ package io;
 import java.io.*;
 import java.util.*;
 
-public abstract class LeArquivo {
+import entidade.EntidadeInterface;
+import entidade.PlanoConta;
 
-	private Scanner entrada;
+public abstract class LeArquivo{
 
-	public LeArquivo(String nome) throws FileNotFoundException {
+	private Scanner entrada;	
+
+	public void iniciaLeituraArquivo(String nome) throws FileNotFoundException {
 		try {
 			this.entrada = new Scanner(new FileReader(nome));
 		} catch (FileNotFoundException e) {
@@ -15,7 +18,7 @@ public abstract class LeArquivo {
 		}
 	}
 
-	public void leArquivo(ArrayList<Object> cad) throws IllegalStateException {
+	private void leArquivo(ArrayList<EntidadeInterface> cad) throws IllegalStateException {
 		String linha;
 		try {
 			while (this.entrada.hasNext()) {
@@ -28,22 +31,23 @@ public abstract class LeArquivo {
 		}
 	}
 
-	public Object leLinha(String linha) throws NoSuchElementException {
-
-		try {
-			/*
-			 * dados = linha.split(";"); String agencia = dados[0]; int num =
-			 * Integer.parseInt(dados[1]); String nome = dados[2]; String cpf = dados[3];
-			 * return (new Conta (agencia, num, nome, cpf));
-			 */
-			return this.retornaObjeto(linha);
+	private EntidadeInterface leLinha(String linha) throws NoSuchElementException {
+		try {			
+			return this.retornaObjetoArquivo(linha);
 		} catch (NoSuchElementException e) {
 			throw new NoSuchElementException("ARQUIVO DIFERENTE DO REGISTRO ");
 		}
 	}
+	
+	public abstract PlanoConta retornaObjetoArquivo(String linha);
 
-	public abstract Object retornaObjeto(String linha);
-
+	public ArrayList<EntidadeInterface> listaRegistros() throws IOException{
+		ArrayList<EntidadeInterface> lista = new ArrayList<EntidadeInterface>();		
+		this.leArquivo(lista);	
+		this.fechaArquivo();
+		return lista;
+	}
+	
 	public void fechaArquivo() throws IOException {
 		try {
 			this.entrada.close();

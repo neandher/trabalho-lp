@@ -1,6 +1,6 @@
-package entity;
+package entidade;
 
-public class PlanoConta {
+public class PlanoConta implements EntidadeInterface {
 
 	public static String NOME_ARQUIVO = "plano_conta.txt";
 	private int cod;
@@ -36,6 +36,10 @@ public class PlanoConta {
 
 	public void setTipoConta(String tipoConta) {
 		this.tipoConta = tipoConta;
+	}	
+	
+	public String toStringArquivo() {
+		return cod + ";" + descricao + ";" + tipoConta + ";";
 	}
 
 }

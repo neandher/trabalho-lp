@@ -1,10 +1,11 @@
 package entidade;
 
-public class MetodoPagamento {
-	
+public class MetodoPagamento implements EntidadeInterface {
+
+	public static String NOME_ARQUIVO = "metodo_pagamento.txt";
 	private int cod;
 	private String descricao;
-	
+
 	public MetodoPagamento(int cod, String descricao) {
 		super();
 		this.cod = cod;
@@ -25,5 +26,14 @@ public class MetodoPagamento {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	@Override
+	public String toString() {
+		return cod + " - " + descricao;
+	}
+
+	public String toStringArquivo() {
+		return cod + ";" + descricao + ";";
 	}
 }

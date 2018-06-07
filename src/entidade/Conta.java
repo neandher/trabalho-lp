@@ -1,29 +1,33 @@
 package entidade;
 
-import java.util.Calendar;
+public abstract class Conta {
 
-abstract class Conta {
-	
+	private int cod;
 	private String descricao;
 	private double valor;
-	private Calendar dataVencimento;
-	private double valorPago;
-	private Calendar dataPagamento;
-	private PlanoConta planoConta;
-	private Status contaStatus;
-	private MetodoPagamento metodoPagamento;
-	
-	public Conta(String descricao, double valor, Calendar dataVencimento, double valorPago, Calendar dataPagamento,
-			PlanoConta planoConta, Status contaStatus, MetodoPagamento metodoPagamento) {
+	private String dataVencimento;
+	private int planoConta;
+	private String contaStatus;
+	private int metodoPagamento;
+
+	public Conta(int cod, String descricao, double valor, String dataVencimento, int planoConta, String contaStatus,
+			int metodoPagamento) {
 		super();
+		this.cod = cod;
 		this.descricao = descricao;
 		this.valor = valor;
 		this.dataVencimento = dataVencimento;
-		this.valorPago = valorPago;
-		this.dataPagamento = dataPagamento;
 		this.planoConta = planoConta;
 		this.contaStatus = contaStatus;
 		this.metodoPagamento = metodoPagamento;
+	}
+
+	public int getCod() {
+		return cod;
+	}
+
+	public void setCod(int cod) {
+		this.cod = cod;
 	}
 
 	public String getDescricao() {
@@ -42,54 +46,43 @@ abstract class Conta {
 		this.valor = valor;
 	}
 
-	public Calendar getDataVencimento() {
+	public String getDataVencimento() {
 		return dataVencimento;
 	}
 
-	public void setDataVencimento(Calendar dataVencimento) {
+	public void setDataVencimento(String dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
 
-	public double getValorPago() {
-		return valorPago;
-	}
-
-	public void setValorPago(double valorPago) {
-		this.valorPago = valorPago;
-	}
-
-	public Calendar getDataPagamento() {
-		return dataPagamento;
-	}
-
-	public void setDataPagamento(Calendar dataPagamento) {
-		this.dataPagamento = dataPagamento;
-	}
-
-	public PlanoConta getPlanoConta() {
+	public int getPlanoConta() {
 		return planoConta;
 	}
 
-	public void setPlanoConta(PlanoConta planoConta) {
+	public void setPlanoConta(int planoConta) {
 		this.planoConta = planoConta;
 	}
 
-	public Status getContaStatus() {
+	public String getContaStatus() {
 		return contaStatus;
 	}
 
-	public void setContaStatus(Status contaStatus) {
+	public void setContaStatus(String contaStatus) {
 		this.contaStatus = contaStatus;
 	}
 
-	public MetodoPagamento getMetodoPagamento() {
+	public int getMetodoPagamento() {
 		return metodoPagamento;
 	}
 
-	public void setMetodoPagamento(MetodoPagamento metodoPagamento) {
+	public void setMetodoPagamento(int metodoPagamento) {
 		this.metodoPagamento = metodoPagamento;
+	}	
+
+	public static String normalizaRef(String contaReferencia) {
+		return contaReferencia.equals(ContaDespesa.REFERENCIA) ? "Despesa" : "Receita";
 	}
 	
+	public abstract String toStringNormaliza();
 	
-	
+	public abstract String toStringArquivo();
 }

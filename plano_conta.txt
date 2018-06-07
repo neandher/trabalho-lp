@@ -1,4 +1,8 @@
-1;Carro;conta_despesa;
-1;Carro;conta_despesa;
-1;Carro;conta_despesa;
-1;Carro;conta_despesa;
+1;Moradia;conta_despesa;
+
+2;Alimentação;conta_despesa;
+3;Salários;conta_receita;
+4;Contratos;conta_receita;
+5;Carro;conta_despesa;
+6;Farmácia;conta_despesa;
+7;Outros;conta_despesa;

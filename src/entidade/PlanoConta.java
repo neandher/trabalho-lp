@@ -5,13 +5,13 @@ public class PlanoConta implements EntidadeInterface {
 	public static String NOME_ARQUIVO = "plano_conta.txt";
 	private int cod;
 	private String descricao;
-	private String tipoConta;
+	private String tipoPlanoConta;
 
-	public PlanoConta(int cod, String descricao, String tipoConta) {
+	public PlanoConta(int cod, String descricao, String tipoPlanoConta) {
 		super();
 		this.cod = cod;
 		this.descricao = descricao;
-		this.tipoConta = tipoConta;
+		this.tipoPlanoConta = tipoPlanoConta;
 	}
 
 	public int getCod() {
@@ -30,16 +30,21 @@ public class PlanoConta implements EntidadeInterface {
 		this.descricao = descricao;
 	}
 
-	public String getTipoConta() {
-		return tipoConta;
+	public String getTipoPlanoConta() {
+		return tipoPlanoConta;
 	}
 
-	public void setTipoConta(String tipoConta) {
-		this.tipoConta = tipoConta;
-	}	
+	public void setTipoPlanoConta(String tipoPlanoConta) {
+		this.tipoPlanoConta = tipoPlanoConta;
+	}		
 	
+	@Override
+	public String toString() {
+		return cod + " - " + descricao + " - " + Conta.normalizaRef(tipoPlanoConta);
+	}
+
 	public String toStringArquivo() {
-		return cod + ";" + descricao + ";" + tipoConta + ";";
+		return cod + ";" + descricao + ";" + tipoPlanoConta + ";";
 	}
 
 }

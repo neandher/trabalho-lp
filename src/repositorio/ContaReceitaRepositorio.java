@@ -89,4 +89,32 @@ public class ContaReceitaRepositorio extends LeArquivo {
 
 		return false;
 	}
+	
+	public boolean atualizar(int cod, ContaReceita conta) throws IOException {
+		this.iniciaLeituraArquivo(ContaReceita.NOME_ARQUIVO);
+		ArrayList<EntidadeInterface> registros = this.listaRegistros();
+
+		String str = "";
+		boolean atualizou = false;
+
+		for (EntidadeInterface entity : registros) {
+			ContaReceita cd = (ContaReceita) entity;
+			if (cd.getCod() == cod) {
+				str += conta.toStringArquivo() + "\n";
+				atualizou = true;
+			} else {
+				str += cd.toStringArquivo() + "\n";
+			}
+		}
+
+		if (atualizou == true) {
+			GravaArq g = new GravaArq(ContaReceita.NOME_ARQUIVO, false);
+			g.gravaArquivo(str);
+			g.fechaArquivo();
+
+			return true;
+		}
+
+		return false;
+	}
 }

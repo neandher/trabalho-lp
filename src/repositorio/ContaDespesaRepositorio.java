@@ -76,10 +76,38 @@ public class ContaDespesaRepositorio extends LeArquivo {
 			if (cd.getCod() == cod)
 				encontrou = true;
 			else
-				str += cd.toStringArquivo() + "\n";			
+				str += cd.toStringArquivo() + "\n";
 		}
 
 		if (encontrou == true) {
+			GravaArq g = new GravaArq(ContaDespesa.NOME_ARQUIVO, false);
+			g.gravaArquivo(str);
+			g.fechaArquivo();
+
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean atualizar(int cod, ContaDespesa conta) throws IOException {
+		this.iniciaLeituraArquivo(ContaDespesa.NOME_ARQUIVO);
+		ArrayList<EntidadeInterface> registros = this.listaRegistros();
+
+		String str = "";
+		boolean atualizou = false;
+
+		for (EntidadeInterface entity : registros) {
+			ContaDespesa cd = (ContaDespesa) entity;
+			if (cd.getCod() == cod) {
+				str += conta.toStringArquivo() + "\n";
+				atualizou = true;
+			} else {
+				str += cd.toStringArquivo() + "\n";
+			}
+		}
+
+		if (atualizou == true) {
 			GravaArq g = new GravaArq(ContaDespesa.NOME_ARQUIVO, false);
 			g.gravaArquivo(str);
 			g.fechaArquivo();

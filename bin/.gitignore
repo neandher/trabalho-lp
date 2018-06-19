@@ -1,6 +1,4 @@
-/entity/
-/io/
-/repository/
+/controlador/
+/util/
 /app/
 /repositorio/
-/entidade/

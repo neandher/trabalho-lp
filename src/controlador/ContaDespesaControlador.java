@@ -166,6 +166,7 @@ public class ContaDespesaControlador {
 		
 		if(conta != null) {
 			String str = "\nConta: " + conta.getDescricao() + " | " + conta.getValor() + " | " + conta.getDataVencimento() + "\n\n";
+			
 			conta.setValorPago(InOut.leDouble(str + "Valor pago:"));
 			conta.setDataPagamento(InOut.leString(str + "Data de pagamento:"));
 			conta.setContaStatus(Status.CONTA_STATUS_PAGO);

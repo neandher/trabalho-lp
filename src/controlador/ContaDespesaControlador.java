@@ -8,6 +8,7 @@ import java.util.Date;
 
 import entidade.ContaDespesa;
 import entidade.Status;
+import exception.CadastroNaoEncontradoException;
 import io.InOut;
 import repositorio.ContaDespesaRepositorio;
 import repositorio.MetodoPagamentoRepositorio;
@@ -147,11 +148,14 @@ public class ContaDespesaControlador {
 		int cod = InOut.leInt("Digite o codigo:");
 
 		ContaDespesaRepositorio rep = new ContaDespesaRepositorio();
-
-		if (rep.excluir(cod))
+			
+		/********* EXEMPLO DE EXCECAO *************/
+		try {
+			rep.excluir(cod);
 			InOut.MsgDeAviso("", Messages.REGISTRO_EXCLUSAO_SUCESSO);
-		else
-			InOut.MsgDeErro("", Messages.REGISTRO_EXCLUSAO_ERRO);
+		} catch (CadastroNaoEncontradoException e) {
+			InOut.MsgDeErro("", e.getMessage());
+		}
 	}
 	
 	public void efetuaBaixa() throws IOException {

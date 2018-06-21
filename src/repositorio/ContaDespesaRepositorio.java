@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import entidade.EntidadeInterface;
+import exception.CadastroNaoEncontradoException;
 import entidade.ContaDespesa;
 import io.GravaArq;
 import io.LeArquivo;
+import util.Messages;
 
 public class ContaDespesaRepositorio extends LeArquivo {
 
@@ -63,7 +65,7 @@ public class ContaDespesaRepositorio extends LeArquivo {
 		g.fechaArquivo();
 	}
 
-	public boolean excluir(int cod) throws IOException {
+	public boolean excluir(int cod) throws IOException, CadastroNaoEncontradoException {
 
 		this.iniciaLeituraArquivo(ContaDespesa.NOME_ARQUIVO);
 		ArrayList<EntidadeInterface> registros = this.listaRegistros();
@@ -87,7 +89,7 @@ public class ContaDespesaRepositorio extends LeArquivo {
 			return true;
 		}
 
-		return false;
+		throw new CadastroNaoEncontradoException(Messages.REGISTRO_NAO_ENCONTRADO);
 	}
 
 	public boolean atualizar(int cod, ContaDespesa conta) throws IOException {

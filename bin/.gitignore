@@ -1,4 +1,7 @@
-/controlador/
-/util/
 /app/
+/controlador/
+/entidade/
+/io/
 /repositorio/
+/util/
+/exception/
